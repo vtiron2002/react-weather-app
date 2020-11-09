@@ -1,5 +1,5 @@
-const GOOGLE_MAPS_API_KEY = "AIzaSyBFwVDYRJhyVzX8t6c77H5I9AJfD_zJ11c";
-const WEATHER_API_KEY = "8748d1179aa448af867220816200811";
+const GOOGLE_MAPS_API_KEY = "";
+const WEATHER_API_KEY = "";
 
 export const coordsToLocation = async ({ lat, long }) => {
   const res = await fetch(
@@ -7,12 +7,14 @@ export const coordsToLocation = async ({ lat, long }) => {
   );
   const data = await res.json();
   const { results } = data;
-  const [{ formatted_address }] = results;
-  return formatted_address;
+
+  return results[0].formatted_address
+    .split(" ")
+    .slice(1, results[0].formatted_address.length - 1);
 };
 
-export const getWeather = async (zipCode) => {
-  const endpoint = `http://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${zipCode}&days=3`;
+export const getWeather = async (location) => {
+  const endpoint = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${location}&days=3`;
   const res = await fetch(endpoint);
   return await res.json();
 };
