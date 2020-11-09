@@ -112,8 +112,8 @@ const WeatherPage = () => {
 
         <StyledForecastDays>
           {forecastday.map((day, i) => {
-            const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
-            const dayName = days[new Date(day.date).getDay()];
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+            const dayName = days[new Date(day.date).getUTCDay()];
             return (
               <Card
                 hover

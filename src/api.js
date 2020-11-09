@@ -10,11 +10,12 @@ export const coordsToLocation = async ({ lat, long }) => {
 
   return results[0].formatted_address
     .split(" ")
-    .slice(1, results[0].formatted_address.length - 1);
+    .slice(1, results[0].formatted_address.length - 1)
+    .join(" ");
 };
 
 export const getWeather = async (location) => {
-  const endpoint = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${location}&days=3`;
+  const endpoint = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${location}&days=4`;
   const res = await fetch(endpoint);
   return await res.json();
 };
